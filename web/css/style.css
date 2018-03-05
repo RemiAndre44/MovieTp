@@ -1,16 +1,66 @@
-*{
+body{
 font-family: 'Shadows Into Light', cursive;
+background-color: #535353;
 }
 
 
 
 img#logo{
-    border: solid;
-    border-width: 1px;
-    height: 20vh;
+
+    height: 10vh;
     display: flex;
 }
 
 #navbar h1{
     display:flex;
+}
+
+#card{
+    margin: 10px;
+}
+
+div#footer{
+    height: 8vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+    vertical-align:bottom;
+}
+
+#card h5{
+    text-align: center;
+}
+
+#btnDescription{
+    margin-left: 27%;
+}
+
+#navbar{
+    border: solid;
+    border-width: 0 0 2px 0;
+
+}
+
+div#back{
+    background-size: cover;
+    height: 800px;
+    opacity: 1;
+}
+
+#pitch{
+    height: 700px;
+    border: solid;
+    border-color: white;
+    border-radius: 5px;
+    background-color: white;
+    opacity: 0.8;
+    margin-top: 10vh;
+    padding-left: 0;
+    padding-right:0;
+}
+
+img#cover{
+    height:90vh;
+    opacity:1;
+    padding: 10px;
 }

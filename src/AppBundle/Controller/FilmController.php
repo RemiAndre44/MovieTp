@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Movie;
 use AppBundle\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class FilmController extends Controller
 {
@@ -24,4 +25,19 @@ class FilmController extends Controller
         ]);
 
     }
+
+    public function detailAction($id, Request $request){
+        $repo= $this->getDoctrine()->getRepository(Movie::class);
+
+        $detailRepo= $repo->findOneByImdbId($id);
+
+        return $this->render('default/detail.html.twig', [
+            "movies"=>$detailRepo,
+        ]);
+    }
+
+
+
+
+
 }

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+
+            <div id="back" style="background-image: url({{ asset('backdrops/'~movies.imdbId~'.jpg') }})">
+
+                <div class="row">
+                    <div class="offset-sm-1 col-sm-4" id="pitch">
+
+                        <img id="cover" class="card-img-top" src="{{ asset('posters/'~movies.imdbId~'.jpg') }}">
+
+                        {{ movies.plot }}
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+    </div>
+{% endblock %}

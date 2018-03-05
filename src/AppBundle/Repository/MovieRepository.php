@@ -11,6 +11,16 @@ namespace AppBundle\Repository;
 class MovieRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    public function findOneById($id)
+    {
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->andWhere('m.movie_id = $id');
+        $query=$qb->getQuery();
+        $results=$query->getResult();
 
+        return $results;
+
+    }
 
 }
