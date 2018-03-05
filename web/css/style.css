@@ -1,0 +1,16 @@
+*{
+font-family: 'Shadows Into Light', cursive;
+}
+
+
+
+img#logo{
+    border: solid;
+    border-width: 1px;
+    height: 20vh;
+    display: flex;
+}
+
+#navbar h1{
+    display:flex;
+}

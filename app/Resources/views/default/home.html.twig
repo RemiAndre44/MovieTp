@@ -1,5 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <h1>Home!</h1>
+    <div class="container">
+        <div class="row">
+    {% for m in movies %}
+
+
+
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card" style=" width: 18rem;">
+                             <img class="card-img-top" src="{{ asset('posters/'~m.imdbId~'.jpg') }}" alt="Card image cap">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ m.title }}</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+
+    {% endfor %}
+    </div>
+    </div>
 {% endblock %}
