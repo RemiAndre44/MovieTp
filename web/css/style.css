@@ -48,7 +48,7 @@ div#back{
 }
 
 #pitch{
-    height: 700px;
+    height: 600px;
     border: solid;
     border-color: white;
     border-radius: 5px;
@@ -60,7 +60,9 @@ div#back{
 }
 
 img#cover{
-    height:90vh;
+    background-size: cover;
+
     opacity:1;
     padding: 10px;
+    margin-top: 10vh;
 }

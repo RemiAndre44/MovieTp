@@ -8,11 +8,35 @@
             <div id="back" style="background-image: url({{ asset('backdrops/'~movies.imdbId~'.jpg') }})">
 
                 <div class="row">
-                    <div class="offset-sm-1 col-sm-4" id="pitch">
+                    <div class="offset-lg-1 col-lg-4">
 
                         <img id="cover" class="card-img-top" src="{{ asset('posters/'~movies.imdbId~'.jpg') }}">
 
-                        {{ movies.plot }}
+                    </div>
+                    <div class="offset-lg-2 col-lg-4" id="pitch">
+                        <h1>{{ movies.title }}-{{ movies.year }}</h1>
+                            {{ movies.plot }}
+                        <div>
+                            <h5>Acteurs</h5>
+                            {{ movies.actors |join (' | ') }}
+                            <hr>
+                        </div>
+                        <div>
+                            <h5>Réalisateur</h5>
+                            {{ movies.directors |join (' | ') }}
+                            <hr>
+                        </div>
+                        <div>
+                            <h5>Scénariste</h5>
+                            {{ movies.writers |join (' | ') }}
+                            <hr>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="offset-lg-3 col-lg-6">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ movies.TrailerId }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                     </div>
                 </div>
         </div>
