@@ -14,3 +14,12 @@ register:
     path:   /inscription
     defaults: { _controller:AppBundle:Film:register}
 
+logout:
+    path:   /deconnexion
+    defaults: { _controller:AppBundle:Film:register}
+
+comment:
+    path:   /commentaire
+    defaults: { _controller:AppBundle:Film:comment}
+
+

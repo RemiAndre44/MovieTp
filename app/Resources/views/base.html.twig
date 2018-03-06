@@ -11,6 +11,9 @@
     </head>
     <body>
 
+        <a name="haut" id="haut"></a>
+
+        <div><a id="cRetour" class="cInvisible" href="#haut"></a></div>
 
         <nav class="navbar navbar-dark" id="navbar">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,16 +29,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href=" "><h4>Détails</h4></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href=" {{ path('login') }}"><h4>Login</h4></a>
-                    </li>
+                    {% if app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}"><h4>Deconnexion</h4></a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('login') }}"><h4>Connexion</h4></a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
             <div>
+                <h2 style="color:white;">Yo
+                    {% if app.user %}
+                        {{ app.user.username }}
+                    {% endif %}!
+                </h2>
+            </div>
+            <div>
+
                 <img id="logo" src="{{ asset('Logo/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png') }}"/>
             </div>
         </nav>
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                window.onscroll = function(ev) {
+                    document.getElementById("cRetour").className = (window.pageYOffset > 100) ? "cVisible" : "cInvisible";
+                };
+            });
+        </script>
 
         {% block main %}
 
@@ -54,4 +78,5 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{{ asset('javascript/yo.js') }}"></script>
 </html>

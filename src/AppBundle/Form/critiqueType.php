@@ -13,11 +13,13 @@ class critiqueType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('users')
-            ->add('title')
-            ->add('datecreated')
-            ->add('content')
-            ->add('movie');
+        $builder
+            ->add('title',[
+                "label"=>"Titre"
+            ])
+            ->add('content',[
+                "label"=>"Commentaire"
+            ]);
 
     }/**
      * {@inheritdoc}

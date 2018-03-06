@@ -4,8 +4,11 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        our_db_provider:
+                    entity:
+                        class: AppBundle\Entity\app_user
+                        property: username
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -25,6 +28,6 @@ security:
                 target: home
 
     encoders:
-            AppBundle\Entity\User:
+            AppBundle\Entity\app_user:
                 algorithm: bcrypt
                 cost: 13

@@ -1,18 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+    {% if error %}
+        <div class="">Mauvais identifiant</div>
+    {% endif %}
 
-    <h1>Créez votre compte</h1>
+    <form action="{{ path('login') }}" method="post">
+        <div >
+            <div class="row">
+                <div class="offset-sm-4 col-sm-4" id="login">
+                    <label for="exampleFormControlInput1" for="username"><h4>Username</h4></label>
+                    <input class="form-control" id="exampleFormControlInput1" placeholder="Veuillez renseigner votre pseudo" type="text" id="username" name="_username" value="{{ last_username }}" />
 
-    {#affiche la balise d'ouverture du formulaire#}
-    {{ form_start(registerForm) }}
+                    <label for="password"><h4>Password </h4></label>
+                    <input class="form-control" id="exampleFormControlInput1" placeholder="Veuillez renseigner votre mot de passe" type="password" id="password" name="_password" />
 
-    {#affiche les champs du formulaire#}
-    {{ form_widget(registerForm) }}
+                    {#
+                        If you want to control the URL the user
+                        is redirected to on success (more details below)
+                        <input type="hidden" name="_target_path" value="/account" />
+                    #}
 
-    <button>C'est parti</button>
+                    <button class="btn btn-dark" type="submit"><h4>Login</h4></button>
+                </div>
+            </div>
+        </div>
+    </form>
 
-    {#affiche la balise de fermeture du formulaire#}
-    {{ form_end() }}
 
 {% endblock %}

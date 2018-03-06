@@ -48,7 +48,21 @@
 
         </div>
     </div>
+    <div>
+        <div class="row">
+            <div class="offset-sm-4 col-sm-4">
+                {{ form_start(registerForm) }}
 
+                {#affiche les champs du formulaire#}
+                {{ form_widget(registerForm) }}
+
+                <button>C'est parti</button>
+
+                {#affiche la balise de fermeture du formulaire#}
+                {{ form_end(registerForm) }}
+            </div>
+        </div>
+    </div>
 
     </div>
 {% endblock %}

@@ -10,6 +10,7 @@ use AppBundle\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class FilmController extends Controller
 {
@@ -43,11 +44,8 @@ class FilmController extends Controller
     }
 
 
-    public function loginAction(){
-        return $this->render('default/login.html.twig');
-    }
-
-    public function registerAction(Request $request, UserPasswordEncoderInterface $encoder){
+    public function registerAction(Request $request){
+        $encoder=$this->get("security.password_encoder");
         //créer un nouveau user vide
         $user=new app_user();
         //créer le formulaire en l'associant à l'user vide
@@ -78,5 +76,25 @@ class FilmController extends Controller
             "registerForm"=>$registerForm->createView()
         ]);
 
+    }
+
+    public function loginAction(AuthenticationUtils $authUtils)
+    {
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render(
+            'default/login.html.twig',
+            array(
+                // last username entered by the user
+                'last_username' => $lastUsername,
+                'error'         => $error,
+            )
+        );
     }
 }
