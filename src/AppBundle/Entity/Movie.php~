@@ -22,6 +22,7 @@ class Movie
      */
     private $id;
 
+
     /**
      * @var string
      *
@@ -124,6 +125,12 @@ class Movie
      */
     private $writers;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\critique", mappedBy="movies")
+     */
+    private $critiques;
 
     /**
      * Get id

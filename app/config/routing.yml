@@ -6,3 +6,11 @@ detail:
     path:   /détails/{id}
     defaults: { _controller: AppBundle:Film:detail}
 
+login:
+    path:   /login
+    defaults: { _controller:AppBundle:Film:login}
+
+register:
+    path:   /inscription
+    defaults: { _controller:AppBundle:Film:register}
+

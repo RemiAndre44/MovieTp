@@ -14,11 +14,17 @@ security:
             security: false
 
         main:
+            logout_on_user_change: true
             anonymous: ~
-            # activate different ways to authenticate
+            pattern: ^/
+            form_login:
+                login_path: login
+                check_path: login
+            logout:
+                path: logout
+                target: home
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    encoders:
+            AppBundle\Entity\User:
+                algorithm: bcrypt
+                cost: 13

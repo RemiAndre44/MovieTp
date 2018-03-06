@@ -22,6 +22,7 @@ class Movie
      */
     private $id;
 
+
     /**
      * @var string
      *
@@ -124,6 +125,12 @@ class Movie
      */
     private $writers;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\critique", mappedBy="movies")
+     */
+    private $critiques;
 
     /**
      * Get id
@@ -519,5 +526,39 @@ class Movie
     public function getWriters()
     {
         return $this->writers;
+    }
+
+    /**
+     * Add critique
+     *
+     * @param \AppBundle\Entity\critique $critique
+     *
+     * @return Movie
+     */
+    public function addCritique(\AppBundle\Entity\critique $critique)
+    {
+        $this->critiques[] = $critique;
+
+        return $this;
+    }
+
+    /**
+     * Remove critique
+     *
+     * @param \AppBundle\Entity\critique $critique
+     */
+    public function removeCritique(\AppBundle\Entity\critique $critique)
+    {
+        $this->critiques->removeElement($critique);
+    }
+
+    /**
+     * Get critiques
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCritiques()
+    {
+        return $this->critiques;
     }
 }

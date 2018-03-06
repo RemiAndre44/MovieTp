@@ -21,6 +21,12 @@ class People
      */
     private $id;
 
+    public function __toString()
+    {
+        return $this ->getName();
+    }
+
+
     /**
      * @var string
      *
