@@ -130,3 +130,16 @@ a#cRetour.cVisible{
     bottom:20px;
     opacity:1;
 }
+
+#titreCom{
+    margin-top:5vh;
+}
+
+#couleurCom{
+    background-color: white;
+}
+
+#comment{
+    margin-top: 5vh;
+    margin-bottom:5vh;
+}

@@ -3,9 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\app_user;
+use AppBundle\Entity\critique;
 use AppBundle\Entity\Movie;
 use AppBundle\Entity\People;
 use AppBundle\Form\app_userType;
+use AppBundle\Form\critiqueType;
 use AppBundle\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,11 +40,30 @@ class FilmController extends Controller
 
         $detailRepo= $repo->findOneByImdbId($id);
 
+        $critique = new critique();
+        $commentForm = $this->createForm(critiqueType::class, $critique);
+
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()){
+            $critique->setContent($id);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($critique);
+            $em->flush();
+
+            $this->addFlash("success", "Merci pour votre critique !");
+
+            return $this->redirectToRoute("detail", [
+                $id
+            ]);
+        }
+
         return $this->render('default/detail.html.twig', [
             "movies"=>$detailRepo,
+            "commentForm"=>$commentForm->createView()
         ]);
     }
-
 
     public function registerAction(Request $request){
         $encoder=$this->get("security.password_encoder");
