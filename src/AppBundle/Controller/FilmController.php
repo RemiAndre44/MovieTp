@@ -38,11 +38,14 @@ class FilmController extends Controller
             $movieRepo=$repo->triparRecherche($recherche);
             //var_dump($movieRepo);
 
+            return $this->render('default/resultatRecheche.html.twig',[
+                "movies"=>$movieRepo,
+            ]);
         }
 
 
         else if ($request->isMethod("POST")) {
-            $categorie= $request->request->get("cat");
+           $categorie= $request->request->get("cat");
             $anneeMin=$request->request->get("anneemin");
             //var_dump($anneeMin);
             $anneemax=$request->request->get("anneemax");
@@ -50,6 +53,9 @@ class FilmController extends Controller
 
             $movieRepo = $repo->triParCatégorie($categorie,$anneeMin,$anneemax);
 
+            return $this->render('default/resultatRecheche.html.twig',[
+                "movies"=>$movieRepo,
+            ]);
         }
 
 
@@ -198,5 +204,31 @@ class FilmController extends Controller
             "listeYear"=>$yearRepo
         ]);
 
+    }
+
+    function resultatRechercheAction(Request $request){
+
+        if ($request->isMethod("POST") && $request->request->get("recherche")) {
+            $recherche=$request->request->get("recherche");
+            $repo=$this->getDoctrine()->getRepository(Movie::class);
+            $movieRepo=$repo->triparRecherche($recherche);
+            //var_dump($movieRepo);
+
+        }
+
+        else if ($request->isMethod("POST")) {
+            $categorie= $request->request->get("cat");
+            $anneeMin=$request->request->get("anneemin");
+            //var_dump($anneeMin);
+            $anneemax=$request->request->get("anneemax");
+            $repo = $this->getDoctrine()->getRepository(Movie::class);
+
+            $movieRepo = $repo->triParCatégorie($categorie,$anneeMin,$anneemax);
+
+        }
+
+        return $this->render('default/home.html.twig', [
+            "movies"=>$movieRepo,
+        ]);
     }
 }

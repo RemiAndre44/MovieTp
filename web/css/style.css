@@ -1,7 +1,8 @@
 
 body{
 font-family: 'Shadows Into Light', cursive;
-background-color: #535353;
+    background-color: #535353;
+
 }
 
 
@@ -16,13 +17,14 @@ img#logo{
     display:flex;
 }
 
-a#btnDescription{
+/*a#btnDescription{
     margin-left: 9vh;
-}
+}*/
 
 #card{
     margin: 10px;
-    min-height: 600px;
+    min-height: 550px;
+    text-align:center;
 }
 
 div#footer{
@@ -178,4 +180,19 @@ a#cRetour.cVisible{
 
 #selection{
     margin-top: 5vh;
+}
+
+
+@media screen and (min-width: 200px) and (max-width: 990px) {
+    #back .hide{
+        display: none;
+    }
+    #pitch{
+        margin-top: 3vh;
+    }
+}
+
+body #background{
+    position: fixed;
+    background-repeat: no-repeat;
 }

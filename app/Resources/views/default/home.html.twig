@@ -1,55 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
-    <div class="container">
-        <form method="POST" action="{{ path('home') }}" name="formulaire" >
-            <div class="row" id="selection">
-                <div class="offset-sm-2 col-sm-2">
-                    <div  class="form-group">
+    <body  id="background" style=" background-repeat: no-repeat;background-attachment: fixed" style="background-image: url({{ asset('/YoTpMovie/web/backdrops/tt3460252.jpg') }}" >
+        <div class="container">
+            <form method="POST" action="{{ path('home') }}" name="formulaire" >
+                <div class="row" id="selection">
+                    <div class="offset-sm-2 col-sm-2">
+                        <div  class="form-group">
 
-                        <select name="cat"  class="form-control">
-                            {% for g in listeGenre %}
-                                <option value="{{ g.id }}">{{ g.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="dropdown">
-                        <select name="anneemin" class="form-control">
-                            {% for l in listeYear %}
-                                <option class="dropdown-item" value="{{ l.year }}" >{{ l.year }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="dropdown">
-                        <select name="anneemax" class="form-control">
-                            {% for l in listeYear %}
-                                <option class="dropdown-item" href="#">{{ l.year }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-
-                <div class="col-sm-2">
-                    <button type="submit" class="btn btn-dark">Soumettre</button>
-                </div>
-            </div>
-        </form>
-        <div class="row">
-            {% for m in movies %}
-            <div class="col-sm-6 col-lg-4">
-                    <div class="card" style=" width: 18rem;" id="card">
-                             <img class="card-img-top" src="{{ asset('posters/'~m.imdbId~'.jpg') }}" alt="Card image cap">
-                        <div class="card-body">
-                        <h5 class="card-title"><strong>{{ m.title }}</strong></h5>
-                        <a id="btnDescription" href="{{ path('detail',{"id": m.imdbId}) }}" class="btn btn-primary">En savoir plus...</a>
+                            <select name="cat"  class="form-control">
+                                {% for g in listeGenre %}
+                                    <option value="{{ g.id }}">{{ g.name }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
                     </div>
+                    <div class="col-sm-2">
+                        <div class="dropdown">
+                            <select name="anneemin" class="form-control">
+                                {% for l in listeYear %}
+                                    <option class="dropdown-item" value="{{ l.year }}" >{{ l.year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="dropdown">
+                            <select name="anneemax" class="form-control">
+                                {% for l in listeYear %}
+                                    <option class="dropdown-item" href="#">{{ l.year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-dark">Soumettre</button>
+                    </div>
                 </div>
-            {% endfor %}
+            </form>
+            <div class="row">
+                {% for m in movies %}
+                <div class="col-sm-6 col-lg-4">
+                        <div class="card" style=" width: 18rem;" id="card">
+                                 <img class="card-img-top" src="{{ asset('posters/'~m.imdbId~'.jpg') }}" alt="Card image cap">
+                            <div class="card-body">
+                            <h5 class="card-title"><strong>{{ m.title }}</strong></h5>
+                            <a id="btnDescription" href="{{ path('detail',{"id": m.imdbId}) }}" class="btn btn-primary">En savoir plus...</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    </div>
+    </body>
 {% endblock %}

@@ -155,3 +155,8 @@ function easeInOutCirc(t){
     t-=2;
     return (Mathf.Sqrt(1-t*t)+1)/2;
 }
+
+
+$(document).ready(function(){
+    $('.carousel').carousel();
+});

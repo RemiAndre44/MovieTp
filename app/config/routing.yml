@@ -26,5 +26,7 @@ people:
     path:   /people/{id}
     defaults: { _controller:AppBundle:Film:people}
 
-
+resultatRecherche:
+    path:   /resultat
+    defaults: { _controller:AppBundle:Film:resultatRecherche}
 
