@@ -17,23 +17,34 @@
                     <div class="offset-lg-2 col-lg-4 col-lg-4 offset-sm-2 col-sm-8" >
                         <div class="row">
                             <div class="col-lg-12" id="pitch">
-                                <h1>{{ movies.title }}-{{ movies.year }}</h1>
-                                    {{ movies.plot }}
-                                <hr>
-                                <div>
-                                    <h5>Acteurs</h5>
-                                    {{ movies.actors |join (' | ') }}
-
-                                </div>
-                                <div>
-                                    <h5>Réalisateur</h5>
-                                    {{ movies.directors |join (' | ') }}
-
-                                </div>
-                                <div>
-                                    <h5>Scénariste</h5>
-                                    {{ movies.writers |join (' | ') }}
-
+                                <div id="pitchContent">
+                                    <h1>{{ movies.title }}-{{ movies.year }}</h1>
+                                        {{ movies.plot }}
+                                    <hr>
+                                    <div>
+                                        <div>Acteurs</div>
+                                            {% for m in movies.actors %}
+                                                <a href="{{ path('people',{"id": m.imdbId}) }}">{{ m.name |join (' | ') }}</a>
+                                            {% endfor %}
+                                    </div>
+                                    <div>
+                                        <div>Réalisateur</div>
+                                            {% for m in movies.directors %}
+                                                <a href="{{ path('people',{"id": m.imdbId}) }}">{{ m.name |join (' | ') }}</a>
+                                            {% endfor %}
+                                    </div>
+                                    <div>
+                                        <div>Scénariste</div>
+                                            {% for m in movies.writers %}
+                                                <a href="{{ path('people',{"id": m.imdbId}) }}">{{ m.name |join (' | ') }}</a>
+                                            {% endfor %}
+                                    </div>
+                                    <div>
+                                        <div>Catégories</div>
+                                        {% for g in movies.genres %}
+                                            {{ g.name |join (' | ') }}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +80,20 @@
             </div>
         </div>
     </div>
+
+        <div id="couleurCom2" class="row">
+
+            <div class="offset-sm-4 col-sm-4">
+                {% for c in critique %}
+                    <div id="commentaire">
+                        <h3>{{ c.title }}</h3>
+                        <div>{{ username}} a posté le {{ c.dateCreated|date("d-m-Y")  }}</div>
+                        <hr>
+                        <div>{{ c.content }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
 {% endblock %}

@@ -31,7 +31,7 @@ class app_user implements UserInterface
      *     min=4,
      *     max=30
      * )
-     * @Assert\Regex("/^[a-z0-9_-]+$/", message="Votre pseudo doit matcher avec notre regex")
+     * @Assert\Regex("/^[a-zA-Z0-9_-]+$/", message="Votre pseudo doit matcher avec notre regex")
      * @Assert\NotBlank(message="Veuillez choisir un pseudo")
      * @ORM\Column(name="username", type="string", length=255, unique=true)
      */

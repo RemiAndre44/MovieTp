@@ -43,7 +43,7 @@ class critique
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Movie", inversedBy="movies")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Movie", inversedBy="critiques")
      */
     private $movie;
 
@@ -166,7 +166,7 @@ class critique
      *
      * @return critique
      */
-    public function setUsers(\AppBundle\Entity\user $users = null)
+    public function setUsers(\AppBundle\Entity\app_user $users = null)
     {
         $this->users = $users;
 

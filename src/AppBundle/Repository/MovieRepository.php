@@ -11,14 +11,77 @@ namespace AppBundle\Repository;
 class MovieRepository extends \Doctrine\ORM\EntityRepository
 {
 
-    public function findOneById($id)
+    public function findYear()
     {
         $qb=$this->createQueryBuilder('m');
-        $qb->addSelect('m')
-            ->andWhere('m.movie_id = $id');
+        $qb->addSelect('m.year')
+            ->groupBy('m.year');
         $query=$qb->getQuery();
         $results=$query->getResult();
 
+        return $results;
+
+    }
+
+    public function triParCatégorie($cat,$anneeMin,$anneeMax){
+
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->join('m.genres','g')
+            ->where('g.id = :genre')
+            ->setParameter("genre",$cat);
+
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->where('m.year >= :anneeMin')
+            ->setParameter("anneeMin",$anneeMin);
+
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->where('m.year <= :anneeMax')
+            ->setParameter("anneeMax",$anneeMax);
+
+
+            $query=$qb->getQuery();
+        $results=$query->getResult();
+
+        return $results;
+    }
+
+    public function triparRecherche($recherche){
+
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->join('m.directors', 'd')
+            ->join('m.actors','a')
+            ->join('m.writers', 'w')
+            ->where('d.name like :recherche')
+            ->orWhere('a.name like :recherche')
+            ->orWhere('w.name like :recherche')
+            ->setParameter("recherche",'%'.$recherche.'%');
+
+
+        $query=$qb->getQuery();
+        $results=$query->getResult();
+        return $results;
+
+    }
+
+    public function lienPeople($recherche){
+
+        $qb=$this->createQueryBuilder('m');
+        $qb->addSelect('m')
+            ->join('m.directors', 'd')
+            ->join('m.actors','a')
+            ->join('m.writers','w')
+            ->where('d.imdbId like :recherche')
+            ->orWhere('a.imdbId like :recherche')
+            ->orWhere('w.imdbId like :recherche')
+            ->setParameter("recherche",'%'.$recherche.'%');
+
+
+        $query=$qb->getQuery();
+        $results=$query->getResult();
         return $results;
 
     }

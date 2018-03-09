@@ -1,3 +1,4 @@
+
 body{
 font-family: 'Shadows Into Light', cursive;
 background-color: #535353;
@@ -15,12 +16,20 @@ img#logo{
     display:flex;
 }
 
+a#btnDescription{
+    margin-left: 9vh;
+}
+
 #card{
     margin: 10px;
+    min-height: 600px;
 }
 
 div#footer{
-    height: 8vh;
+    border: solid;
+    border-width: 1px 0 0 0;
+    border-color: white;
+    height: 10vh;
     background-color: black;
     color: white;
     text-align: center;
@@ -43,7 +52,8 @@ div#footer{
 
 #navbar{
     border: solid;
-    border-width: 0 0 2px 0;
+    border-width: 0 0 1px 0;
+    border-color: white;
     background-color: black;
 
 }
@@ -54,12 +64,20 @@ div#back{
     opacity: 1;
 }
 
+#pitchContent{
+    padding-left:20px;
+    padding-right: 20px;
+}
+
 #pitch{
     height: 400px;
+    padding:10px;
     border: solid;
+    color: white;
     border-color: white;
+    border-width:0px;
     border-radius: 5px;
-    background-color: white;
+    background-color: black;
     opacity: 0.8;
     margin-top: 6vh;
     padding-left: 0;
@@ -142,4 +160,22 @@ a#cRetour.cVisible{
 #comment{
     margin-top: 5vh;
     margin-bottom:5vh;
+}
+
+#commentaire{
+    margin-top: 5vh;
+    margin-bottom:5vh;
+    border:solid;
+    border-radius:5px;
+    border-width:1px;
+    padding: 2vh;
+
+}
+
+#couleurCom2{
+    background-color: white;
+}
+
+#selection{
+    margin-top: 5vh;
 }

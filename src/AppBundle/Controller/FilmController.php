@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\app_user;
 use AppBundle\Entity\critique;
+use AppBundle\Entity\Genre;
 use AppBundle\Entity\Movie;
 use AppBundle\Entity\People;
 use AppBundle\Form\app_userType;
@@ -21,16 +22,42 @@ class FilmController extends Controller
         return $this->render('', array('name' => $name));
     }
 
-    public function homeAction()
+    public function homeAction(Request $request)
     {
         $repo= $this->getDoctrine()->getRepository(Movie::class);
 
         $movieRepo=$repo->findAll();
 
+        $reGenre=$this->getDoctrine()->getRepository(Genre::class);
+        $listeGenre=$reGenre->findAll();
+        $yearRepo=$repo->findYear();
+
+        if ($request->isMethod("POST") && $request->request->get("recherche")) {
+            $recherche=$request->request->get("recherche");
+            $repo=$this->getDoctrine()->getRepository(Movie::class);
+            $movieRepo=$repo->triparRecherche($recherche);
+            //var_dump($movieRepo);
+
+        }
+
+
+        else if ($request->isMethod("POST")) {
+            $categorie= $request->request->get("cat");
+            $anneeMin=$request->request->get("anneemin");
+            //var_dump($anneeMin);
+            $anneemax=$request->request->get("anneemax");
+            $repo = $this->getDoctrine()->getRepository(Movie::class);
+
+            $movieRepo = $repo->triParCatégorie($categorie,$anneeMin,$anneemax);
+
+        }
+
 
 
         return $this->render('default/home.html.twig', [
             "movies"=>$movieRepo,
+            "listeGenre"=>$listeGenre,
+            "listeYear"=>$yearRepo
         ]);
 
     }
@@ -41,12 +68,19 @@ class FilmController extends Controller
         $detailRepo= $repo->findOneByImdbId($id);
 
         $critique = new critique();
+        $critique->setDateCreated(new\DateTime());
+        $critique->setMovie($detailRepo);
+        $critique->setUsers($this->getUser());
+        $username=$this->getUser()->getUsername();
+
+        $reCritique= $this->getDoctrine()->getRepository(critique::class);
+        $listeCritique=$reCritique->findBy(["movie"=> $detailRepo],["datecreated"=>"DESC"],10,0);
+
         $commentForm = $this->createForm(critiqueType::class, $critique);
 
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()){
-            $critique->setContent($id);
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($critique);
@@ -54,14 +88,18 @@ class FilmController extends Controller
 
             $this->addFlash("success", "Merci pour votre critique !");
 
-            return $this->redirectToRoute("detail", [
+            return $this->redirectToRoute("home"/*, [
                 $id
-            ]);
+            ]*/);
         }
 
-        return $this->render('default/detail.html.twig', [
+        return $this->render("default/detail.html.twig", [
+            $id,
             "movies"=>$detailRepo,
-            "commentForm"=>$commentForm->createView()
+            "commentForm"=>$commentForm->createView(),
+            "critique"=>$listeCritique,
+            "username"=>$username,
+
         ]);
     }
 
@@ -99,6 +137,7 @@ class FilmController extends Controller
 
     }
 
+
     public function loginAction(AuthenticationUtils $authUtils)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
@@ -117,5 +156,47 @@ class FilmController extends Controller
                 'error'         => $error,
             )
         );
+    }
+
+    public function peopleAction($id,Request $request){
+        $repo= $this->getDoctrine()->getRepository(Movie::class);
+        //var_dump($id);
+
+        $reGenre=$this->getDoctrine()->getRepository(Genre::class);
+        $listeGenre=$reGenre->findAll();
+        $yearRepo=$repo->findYear();
+
+        $repo= $this->getDoctrine()->getRepository(Movie::class);
+
+        $movieRepo=$repo->lienPeople($id);
+
+        //var_dump($movieRepo);
+
+        if ($request->isMethod("POST") && $request->request->get("recherche")) {
+            $recherche=$request->request->get("recherche");
+            $repo=$this->getDoctrine()->getRepository(Movie::class);
+            $movieRepo=$repo->triparRecherche($recherche);
+            var_dump($movieRepo);
+
+        }
+
+
+        else if ($request->isMethod("POST")) {
+            $categorie= $request->request->get("cat");
+            $anneeMin=$request->request->get("anneemin");
+            //var_dump($anneeMin);
+            $anneemax=$request->request->get("anneemax");
+            $repo = $this->getDoctrine()->getRepository(Movie::class);
+
+            $movieRepo = $repo->triParCatégorie($categorie,$anneeMin,$anneemax);
+
+        }
+
+        return $this->render('default/home.html.twig', [
+            "movies"=>$movieRepo,
+            "listeGenre"=>$listeGenre,
+            "listeYear"=>$yearRepo
+        ]);
+
     }
 }

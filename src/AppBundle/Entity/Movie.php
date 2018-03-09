@@ -128,7 +128,7 @@ class Movie
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\critique", mappedBy="movies")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\critique", mappedBy="movie")
      */
     private $critiques;
 
